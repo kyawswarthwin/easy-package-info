@@ -1,0 +1,28 @@
+{
+  "name": "easy-package-info",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyawswarthwin/easy-package-info.git"
+  },
+  "keywords": [
+    "aapt",
+    "apk",
+    "xapk"
+  ],
+  "author": "Kyaw Swar Thwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyawswarthwin/easy-package-info/issues"
+  },
+  "homepage": "https://github.com/kyawswarthwin/easy-package-info#readme",
+  "dependencies": {
+    "easy-unzip": "^1.0.3",
+    "mime-types": "^2.1.19"
+  }
+}
