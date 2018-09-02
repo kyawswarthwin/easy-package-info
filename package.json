@@ -1,6 +1,6 @@
 {
   "name": "easy-package-info",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/kyawswarthwin/easy-package-info.git"
   },
   "keywords": [
-    "aapt",
+    "ipa",
     "apk",
     "xapk"
   ],
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/kyawswarthwin/easy-package-info#readme",
   "dependencies": {
-    "easy-unzip": "^1.0.3",
-    "mime-types": "^2.1.19"
+    "easy-unzip": "^1.1.0",
+    "mime-types": "^2.1.20"
   }
 }
