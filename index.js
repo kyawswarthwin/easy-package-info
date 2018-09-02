@@ -13,7 +13,7 @@ const { revert: cgbiToPng } = require('cgbi-to-png');
 
 const IOS_DEVICE_FAMILY = ['iPhone', 'iPad', 'iPod Touch'];
 
-function packageInfo(filePath, aapt = path.join(__dirname, 'bin', os.platform(), 'aapt')) {
+function packageInfo(filePath, aapt = undefined) {
   return new Promise(async (resolve, reject) => {
     try {
       const ext = path.extname(filePath).toLowerCase();
@@ -70,9 +70,10 @@ function ipaInfo(filePath) {
   });
 }
 
-function apkInfo(filePath, aapt) {
+function apkInfo(filePath, aapt = undefined) {
   return new Promise(async (resolve, reject) => {
     try {
+      aapt = aapt || path.join(__dirname, 'bin', os.platform(), 'aapt');
       const { stdout, stderr } = await execAsync(`"${aapt}" d badging "${filePath}"`);
       if (stderr) throw stderr;
       const pkg = stdout.match(/package: name='(.*?)' versionCode='(.*?)' versionName='(.*?)'/);
