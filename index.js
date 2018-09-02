@@ -20,7 +20,7 @@ function packageInfo(filePath, aapt = path.join(__dirname, 'bin', os.platform(),
           resolve(await xapkInfo(filePath));
           break;
         default:
-          throw 'Error: Unsupported File Format';
+          throw new Error('Unsupported File Format');
       }
     } catch (error) {
       reject(error);
