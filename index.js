@@ -43,7 +43,7 @@ function apkInfo(filePath, aapt) {
         packageName: pkg[1],
         versionCode: Number(pkg[2]),
         versionName: pkg[3],
-        requiredSdk: Number(sdkVer[1])
+        minSdkVersion: Number(sdkVer[1])
       });
     } catch (error) {
       reject(error);
@@ -62,7 +62,7 @@ function xapkInfo(filePath) {
         packageName: manifest.package_name,
         versionCode: Number(manifest.version_code),
         versionName: manifest.version_name,
-        requiredSdk: Number(manifest.min_sdk_version)
+        minSdkVersion: Number(manifest.min_sdk_version)
       });
     } catch (error) {
       reject(error);
