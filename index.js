@@ -11,8 +11,6 @@ const { parseBuffer: bplistParse } = require('bplist-parser');
 const { parse: plistParse } = require('plist');
 const { revert: cgbiToPng } = require('cgbi-to-png');
 
-const IOS_DEVICE_FAMILY = ['iPhone', 'iPad', 'iPod Touch'];
-
 function packageInfo(filePath, aapt = undefined) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -61,7 +59,8 @@ function ipaInfo(filePath) {
         version: info.CFBundleShortVersionString || info.CFBundleVersion,
         buildNumber: info.CFBundleVersion,
         minOsVersion: info.MinimumOSVersion,
-        deviceFamily: getDeviceFamily(info.UIDeviceFamily)
+        deviceFamily: [].concat(info.UIDeviceFamily),
+        platform: 'ios'
       });
     } catch (error) {
       reject(error);
@@ -86,7 +85,7 @@ function apkInfo(filePath, aapt = undefined) {
         version: pkg[3],
         buildNumber: pkg[2],
         minOsVersion: sdkVer[1],
-        deviceFamily: ['Android']
+        platform: 'android'
       });
     } catch (error) {
       reject(error);
@@ -106,7 +105,7 @@ function xapkInfo(filePath) {
         version: manifest.version_name,
         buildNumber: manifest.version_code,
         minOsVersion: manifest.min_sdk_version,
-        deviceFamily: ['Android']
+        platform: 'android'
       });
     } catch (error) {
       reject(error);
@@ -141,28 +140,6 @@ function getIcon(filePath, fileName = undefined) {
     } catch (error) {
       reject(error);
     }
-  });
-}
-
-function getDeviceFamily(value) {
-  const deviceFamily = [];
-  value &&
-    [].concat(value).forEach(element => {
-      switch (element) {
-        case 1:
-          deviceFamily.push(IOS_DEVICE_FAMILY[0]);
-          deviceFamily.push(IOS_DEVICE_FAMILY[2]);
-          break;
-        case 2:
-          deviceFamily.push(IOS_DEVICE_FAMILY[1]);
-          break;
-        default:
-          deviceFamily.push(element);
-          break;
-      }
-    });
-  return deviceFamily.sort((a, b) => {
-    return IOS_DEVICE_FAMILY.indexOf(a) - IOS_DEVICE_FAMILY.indexOf(b);
   });
 }
 
