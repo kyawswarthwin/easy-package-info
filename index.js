@@ -52,7 +52,6 @@ function ipaInfo(filePath) {
         info.CFBundleIcons &&
           info.CFBundleIcons.CFBundlePrimaryIcon &&
           info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles &&
-          info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles.length &&
           info.CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles.slice(-1)[0]
       );
       resolve({
@@ -148,12 +147,18 @@ function getIcon(filePath, fileName = undefined) {
 function getDeviceFamily(value) {
   const deviceFamily = [];
   value &&
-    value.forEach(element => {
-      if (element === 2) {
-        deviceFamily.push(IOS_DEVICE_FAMILY[1]);
-      } else {
-        deviceFamily.push(IOS_DEVICE_FAMILY[0]);
-        deviceFamily.push(IOS_DEVICE_FAMILY[2]);
+    [].concat(value).forEach(element => {
+      switch (element) {
+        case 1:
+          deviceFamily.push(IOS_DEVICE_FAMILY[0]);
+          deviceFamily.push(IOS_DEVICE_FAMILY[2]);
+          break;
+        case 2:
+          deviceFamily.push(IOS_DEVICE_FAMILY[1]);
+          break;
+        default:
+          deviceFamily.push(element);
+          break;
       }
     });
   return deviceFamily.sort((a, b) => {
