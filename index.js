@@ -56,11 +56,11 @@ function ipaInfo(filePath) {
       );
       resolve({
         icon: icon,
-        displayName: info.CFBundleDisplayName,
+        name: info.CFBundleDisplayName || info.CFBundleName,
         uniqueIdentifier: info.CFBundleIdentifier,
         version: info.CFBundleShortVersionString || info.CFBundleVersion,
         buildNumber: info.CFBundleVersion,
-        minimumOsVersion: info.MinimumOSVersion,
+        minOsVersion: info.MinimumOSVersion,
         deviceFamily: getDeviceFamily(info.UIDeviceFamily)
       });
     } catch (error) {
@@ -81,11 +81,11 @@ function apkInfo(filePath, aapt = undefined) {
       const icon = await getIcon(filePath, app[2]);
       resolve({
         icon: icon,
-        displayName: app[1],
+        name: app[1],
         uniqueIdentifier: pkg[1],
         version: pkg[3],
         buildNumber: pkg[2],
-        minimumOsVersion: sdkVer[1],
+        minOsVersion: sdkVer[1],
         deviceFamily: ['Android']
       });
     } catch (error) {
@@ -101,11 +101,11 @@ function xapkInfo(filePath) {
       const icon = await getIcon(filePath);
       resolve({
         icon: icon,
-        displayName: manifest.name,
+        name: manifest.name,
         uniqueIdentifier: manifest.package_name,
         version: manifest.version_name,
         buildNumber: manifest.version_code,
-        minimumOsVersion: manifest.min_sdk_version,
+        minOsVersion: manifest.min_sdk_version,
         deviceFamily: ['Android']
       });
     } catch (error) {
